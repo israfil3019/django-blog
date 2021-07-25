@@ -3,5 +3,7 @@
 {% if request.user.is_authenticated %}
 <h2>Welcome {{request.user}}!</h2>
 {% else %}
-<h2>There will be detail of the blog</h2>
+{{blog.text}}
+<a href="{% url 'update' blog.id %}"><button>Update</button></a>
+<a href="{% url 'delete' blog.id %}"><button>Delete</button></a>
 {% endif %} {% endblock content %}
