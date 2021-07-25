@@ -1,0 +1,7 @@
+{% extends 'users/base.html' %} {% block content %}
+<h1>Details Page</h1>
+{% if request.user.is_authenticated %}
+<h2>Welcome {{request.user}}!</h2>
+{% else %}
+<h2>There will be detail of the blog</h2>
+{% endif %} {% endblock content %}
