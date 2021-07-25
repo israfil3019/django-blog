@@ -4,6 +4,14 @@
 <h2>Welcome {{request.user}}!</h2>
 
 
+{% for blog in blogs %}
+<div>
+    <h1><a href="">{{ blog.title }}</a></h1>
+    <p>{{ blog.text}}</p>
+    <p>published: {{ blog.published_date }}</p>
+</div>
+{% endfor %}
+    
 <h2>There will be lots of blog</h2>
 
 {% endblock content %}
