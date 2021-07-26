@@ -6,7 +6,7 @@
 
 {% for blog in blogs %}
 <div>
-    <h1><a href="">{{ blog.title }}</a></h1>
+    <h1><a href="{% url 'blog:detail' pk=blog.pk %}">{{ blog.title }}</a></h1>
     <p>{{ blog.text}}</p>
     <p>published: {{ blog.published_date }}</p>
 </div>
