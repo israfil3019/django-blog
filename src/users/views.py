@@ -22,7 +22,7 @@ def register(request):
         profile.user = user
 
         if 'profile_pics' in request.FILES:
-            profile.pics = request.FILES['profile_pics']
+            profile.profile_pics = request.FILES['profile_pics']
 
         profile.save()
 
@@ -64,4 +64,8 @@ def user_login(request):
             messages.error(request, "Password or Username is wrong!")
             return render(request, 'users/user_login.html', {"form": form})
     return render(request, 'users/user_login.html', {"form": form})
+
+
+def profile(request):
+    return render(request, 'users/profile.html')
 
