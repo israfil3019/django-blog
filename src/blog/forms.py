@@ -8,8 +8,7 @@ class BlogForm(forms.ModelForm):
         model = Blog
         fields = {
             "title",
+            "text",
+            "author",
         }
-        labels = {"title": "Name"}
-        widgets = {
-            'title': forms.TextInput(attrs={"class": "form-control"}),
-        }
+        labels = {"title": "Blog Title"}

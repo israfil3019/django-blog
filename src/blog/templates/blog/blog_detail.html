@@ -1,9 +1,10 @@
 {% extends 'users/base.html' %} {% block content %}
 <h1>Details Page</h1>
 {% if request.user.is_authenticated %}
-<h2>Welcome {{request.user}}!</h2>
-{% else %}
+<h2>{{blog.title}}</h2>
 {{blog.text}}
-<a href="{% url 'update' blog.id %}"><button>Update</button></a>
-<a href="{% url 'delete' blog.id %}"><button>Delete</button></a>
+<a href="{% url 'blog:update' id=blog.id %}"><button>Update</button></a>
+<a href="{% url 'blog:delete' id=blog.id %}"><button>Delete</button></a>
+{% else %}
+<h3>You should login first!</h3>
 {% endif %} {% endblock content %}

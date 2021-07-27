@@ -1,4 +1,4 @@
-{% extends "fscohort/base.html" %}
+{% extends "users/base.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
 Add
@@ -9,6 +9,6 @@ Add
     <form action="" method="post">
         {% csrf_token %}
         {{form|crispy}}
-        <input type="submit" value="add">
+        <input type="submit" value="Add">
     </form>
 {% endblock content %}

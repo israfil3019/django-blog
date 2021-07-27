@@ -8,10 +8,10 @@
 <div>
     <h1><a href="{% url 'blog:detail' pk=blog.pk %}">{{ blog.title }}</a></h1>
     <p>{{ blog.text}}</p>
-    <p>published: {{ blog.published_date }}</p>
+    <p>created: {{ blog.created_date }}</p>
 </div>
 {% endfor %}
-<a href="">
+<a href="{% url 'blog:add'%}">
     <button>Add Blog</button>
   </a>
     
