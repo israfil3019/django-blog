@@ -2,6 +2,7 @@
 <h1>Details Page</h1>
 {% if request.user.is_authenticated %}
 <h2>{{blog.title}}</h2>
+<p style="height: 1rem; width: 1rem;"></p>
 {{blog.text}}
 <a href="{% url 'blog:update' id=blog.id %}"><button>Update</button></a>
 <a href="{% url 'blog:delete' id=blog.id %}"><button>Delete</button></a>

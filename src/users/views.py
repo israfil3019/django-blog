@@ -15,14 +15,23 @@ def register(request):
     form_user = UserForm(request.POST or None)
     form_profile = UserProfileForm(request.POST or None)
 
+    
     if form_user.is_valid():
-
         user = form_user.save()
+        profile = form_profile.save(commit=False)
+        profile.user = user
+
+        if 'profile_pics' in request.FILES:
+            profile.pics = request.FILES['profile_pics']
+
+        profile.save()
+
         messages.success(request, "Register successful")
         return redirect('blog:main_page')
 
     context = {
-        'form_user': form_user
+        'form_user': form_user,
+        'form_profile': form_profile,
     }
 
     return render(request, 'users/register.html', context)
