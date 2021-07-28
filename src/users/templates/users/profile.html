@@ -1,6 +1,6 @@
-{% extends 'users/base.html' %} {% block content %}
+{% extends 'users/base.html' %}
+ {% block content %}
 <h1>Profile Page</h1>
 <h2>{{request.user}}</h2>
 <img src="{{request.user.profile_pics}}" alt="">
-
-{% endif %} {% endblock content %}
+{% endblock content %}

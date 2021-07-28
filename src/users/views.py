@@ -68,3 +68,7 @@ def user_login(request):
 def profile(request):
     return render(request, 'users/profile.html')
 
+
+def about(request):
+    return render(request, 'users/about.html')
+
