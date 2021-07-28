@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 # login imports
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-
 from django.contrib import messages
 
 

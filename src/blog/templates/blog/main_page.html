@@ -6,14 +6,17 @@
 
 {% for blog in blogs %}
 <div>
-    <h1><a href="{% url 'blog:detail' pk=blog.pk %}">{{ blog.title }}</a></h1>
-    <p>{{ blog.text}}</p>
-    <p>created: {{ blog.created_date }}</p>
+  <h1><a href="{% url 'blog:detail' pk=blog.pk %}">{{ blog.title }}</a></h1>
+  <p>{{ blog.text}}</p>
+  <p>created: {{ blog.created_date }}</p>
 </div>
 {% endfor %}
+
 <a href="{% url 'blog:add'%}">
-    <button>Add Blog</button>
-  </a>
+  <button>Add Blog</button>
+</a>
+
+
     
 <h2>There will be lots of blog</h2>
 

@@ -6,4 +6,4 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = Blog
-        exclude = ('created_date',)
+        fields = ["author", "title", "text", "img"]
