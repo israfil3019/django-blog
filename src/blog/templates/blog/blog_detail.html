@@ -1,12 +1,35 @@
 {% extends 'users/base.html' %} {% block content %}
-<h1>Details Page</h1>
-{% if request.user.is_authenticated %}
-<h2>{{blog.title}}</h2>
 
-<img style="height: 1rem; width: 1rem;" src="{{blog.img}}" alt="blog">
-{{blog.text}}
-<a href="{% url 'blog:update' id=blog.id %}"><button>Update</button></a>
-<a href="{% url 'blog:delete' id=blog.id %}"><button>Delete</button></a>
-{% else %}
-<h3>You should login first!</h3>
-{% endif %} {% endblock content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7">
+      <div class="card-block">
+        <!--           <h4 class="card-title">Small card</h4> -->
+        <h4>{{blog.title}}</h4>
+        <p>{{blog.text}}</p>
+        {% if request.user == blog.author %}
+        <a
+          href="{% url 'blog:update' id=blog.id %}"
+          class="btn btn-primary btn-sm"
+          >Update</a
+        >
+        <a
+          href="{% url 'blog:delete' id=blog.id %}"
+          class="btn btn-danger btn-sm"
+          >Delete</a
+        >
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+      <img
+        class="d-block w-100"
+        style="height: 10rem; width: 10rem"
+        src="{{blog.img}}"
+        alt="blog cap"
+      />
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -13,6 +13,7 @@ class BlogCreate(CreateView):
     form_class = BlogForm
     template_name = "blog/blog_add.html"  # app/blog_form.html  == suffix  '_form'
     success_url = '/blog/'
+
 class BlogUpdate(UpdateView):
     model = Blog
     form_class = BlogForm
