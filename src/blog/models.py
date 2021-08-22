@@ -1,14 +1,74 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-class Blog(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    text = models.TextField()
-    img = models.ImageField(upload_to='blog', blank=True)
-    created_date = models.DateTimeField(
-            default=timezone.now)
+def user_directory_path(instance, filename):
+    return 'blog/{0}/{1}'.format(instance.author.id, filename)
+    #create folder for every id
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    
+    class Meta:
+        verbose_name_plural = "Categories"
+        
+    def __str__(self):
+        return self.name
 
+class Blog(models.Model):
+    # OPTIONS = (
+    #     ('d', 'Draft'),
+    #     ('p', 'Published')
+    # )
+  
+    title = models.CharField(max_length=100)    
+    text = models.TextField()
+    image = models.ImageField(upload_to=user_directory_path, default='django.jpg')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, blank=True, null=True)
+    # publish_date = models.DateTimeField(auto_now_add=True)
+    # last_updated = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # status = models.CharField(max_length=10, choices=OPTIONS, default='d')
+    slug = models.SlugField(blank=True)
+    created_date = models.DateTimeField(
+        default=timezone.now)
     def __str__(self):
         return self.title
+    
+    
+    def comment_count(self):
+        return self.comment_set.all().count()
+    
+    def view_count(self):
+        return self.blogview_set.all().count()
+    
+    def like_count(self):
+        return self.like_set.all().count()
+    
+    def comments(self):
+        return self.comment_set.all()
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment")
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    
+    def __str__(self):
+        return self.user.username
+    
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+    
+class BlogView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.user.username
+    
