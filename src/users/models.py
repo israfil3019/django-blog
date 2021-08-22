@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class UserProfile(models.Model):
+def user_profile_path(instance, filename):
+    return 'user/{0}/{1}'.format(instance.user.id, filename)
 
+
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pics = models.ImageField(upload_to='profile_pics', blank=True)
+    image = models.ImageField(upload_to= user_profile_path, default="avatar.png")
 
     def __str__(self):
-        return self.user.username
+        return "{} {}".format(self.user, 'Profile')
