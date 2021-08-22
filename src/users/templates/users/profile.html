@@ -1,6 +1,23 @@
-{% extends 'users/base.html' %}
- {% block content %}
-<h1>Profile Page</h1>
-<h2>{{request.user}}</h2>
-<img src="{{request.user.profile_pics}}" alt="">
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="w-50 p-4 mx-auto">
+    <div class="d-flex flex-row mb-2">
+        <img class="rounded-circle w-25 mr-4" src="{{ user.profile.image.url }}">
+        <div >
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info btn-block" type="submit">Update</button>
+        </div>
+    </form>
+</div>
 {% endblock content %}
