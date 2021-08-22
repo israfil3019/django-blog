@@ -1,0 +1,57 @@
+{% load static %}
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button
+      class="navbar-toggler navbar-toggler-right"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'blog:main_page' %}">
+      <img style="width: 2rem;" src="{% static 'images/logo.svg' %}" alt="static 'images/logo.svg' " />
+      Blog
+    </a>
+    <div class="collapse navbar-collapse" id="navbarCollapse"></div>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'blog:main_page' %}">Home</a>
+        </li>
+        {% if request.user.is_authenticated %} 
+        {% if request.user.is_superuser%}
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin">Admin</a>
+        </li>
+        {% endif %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'blog:add' %}">New</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
