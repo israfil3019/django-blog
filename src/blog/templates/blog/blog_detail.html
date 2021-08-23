@@ -1,35 +1,73 @@
-{% extends 'users/base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-7">
-      <div class="card-block">
-        <!--           <h4 class="card-title">Small card</h4> -->
-        <h4>{{blog.title}}</h4>
-        <p>{{blog.text}}</p>
-        {% if request.user == blog.author %}
-        <a
-          href="{% url 'blog:update' id=blog.id %}"
-          class="btn btn-primary btn-sm"
-          >Update</a
-        >
-        <a
-          href="{% url 'blog:delete' id=blog.id %}"
-          class="btn btn-danger btn-sm"
-          >Delete</a
-        >
-        {% endif %}
+{% block content %}
+
+<div class="card mb-3 p-2 border-info">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="blog_image" 
+        style="object-fit: fill; width: 30rem; height: 20rem; border-radius: 4px;">
+        <div class="card-body">
+            <h5 class="card-title">{{ object.title }}</h5>
+            <hr>
+            <p class="card-text">{{ object.text }}.</p>
+            
+            
+        </div>
       </div>
-    </div>
+      <div class="col-md-6">
+        <div class="m-3 pb-3 d-flex justify-content-evenly">
+            <span class="text-secondary"><i class="far fa-comment fa-3x "></i></i> {{ object.comment_count }}</span>
+            <span class="text-info"><i class="fas fa-eye ml-3 fa-3x"></i> {{ object.view_count }}</span>
+            <span class="text-primary"><i class="fas fa-thumbs-up ml-3 fa-3x"></i> {{ object.like_count }}</span>
+        </div>
+        <div>
+            <form action="{% url 'blog:like' object.slug %}" method="POST">
 
-    <div class="col-sm-5">
-      <img
-        class="d-block w-100"
-        style="height: 10rem; width: 10rem"
-        src="{{blog.img}}"
-        alt="blog cap"
-      />
+                {% csrf_token %}
+                <input type="hidden" name="blog">
+                <input type="hidden" name="user">
+
+                <button type="submit" class="btn btn-outline-primary btn-lg btn-block"><i class="fas fa-thumbs-up lg"> Like </i></i></button>
+            </form>
+            <hr>
+            <!-- {% if user.is_authenticated %} -->
+            <h4>Leave a comment below</h4>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button class="btn btn-secondary btn-block">SEND</button>
+            </form>
+            <hr>
+            <h4>Comments</h4>
+            {% for comment in object.comments %}
+            <div>
+                <p>
+                    <small><b>Comment by {{comment.user}}</b></small>
+                     - 
+                    <small>{{ comment.time_stamp|timesince }} ago.
+                    </small>
+                </p>
+                <p>{{ comment.content }}</p>
+            </div>
+            <hr>
+            {% endfor %}
+            <!-- {% else %} -->
+            <!-- <a href="#" class="btn btn-primary btn-block">Login to comment</a> -->
+            <!-- {% endif %} -->
+        
+        </div>
+
+      </div>
+
+        <div class="p-2">
+        {% if user.id == object.author.id %}
+        <a href="{% url 'blog:update' object.slug %}" class="btn btn-info btn-block">Edit</a>
+        <a href="{% url 'blog:delete' object.slug %}" class="btn btn-danger btn-block">Delete</a>
+        {% endif %}
+        </div>
     </div>
-  </div>
 </div>
+
 {% endblock content %}
