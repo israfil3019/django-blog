@@ -1,10 +1,10 @@
 {% load static %}
-<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-secondary">
     <button
       class="navbar-toggler navbar-toggler-right"
       type="button"
-      data-toggle="collapse"
-      data-target="#navbarCollapse"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse"
       aria-expanded="false"
       aria-label="Toggle navigation"
@@ -15,7 +15,7 @@
       <img style="width: 2rem;" src="{% static 'images/logo.svg' %}" alt="static 'images/logo.svg' " />
       Blog
     </a>
-    <div class="collapse navbar-collapse" id="navbarCollapse"></div>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'blog:main_page' %}">Home</a>
