@@ -1,36 +1,32 @@
-{% extends 'users/base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="container">
-  <div class="row my-2 justify-content-center">
-    
-      {% for blog in blogs %}
-      <div class="col-12 col-sm-6 col-md-4 my-3">
-      <div class="card text-center " style="border: 1px solid #8af7ff;">
-        <h5 class="card-header">Category</h5>
-        <img class="card-img-top" src="{{blog.img}}" alt="Card image cap" />
-        <div class="card-body">
-          <h5 class="card-title">
-            <a href="{% url 'blog:detail' pk=blog.pk %}">{{ blog.title }}</a>
-          </h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="#">like --</a>
-            
-            <a href="#">-- comment</a>
-          </li>
-        </ul>
-        <div class="card-body m-2">
-        <a href="#" class="btn btn-secondary">Comment</a>
-        <a href="{% url 'blog:detail' pk=blog.pk %}" class="btn btn-primary">Details</a>
-      </div>
-        <div class="card-footer">
-          <p class="card-text">
-            <small class="text-muted">created: {{ blog.created_date }}</small>
-          </p>
-        </div>
+    <div class="row my-2 mt-5">
+  {% for obj in object_list %}
+  <div class="col-12 col-sm-6 col-md-4 my-3">
+    <div class="card shadow mb-5 border border-secondary bg-light rounded-top" style="max-width: 20rem; min-width: 14rem;">
+        <img src="{{ obj.image.url }}" class="card-img-top" alt="blog_image" style="height: 14rem;"/>
+        <!-- <h5 class="card-header text-center">{{ obj.category }}</h5> -->
+      <div class="card-body p-4">
+        <h5 class="card-title text-center">
+          <a href="{% url 'blog:detail' obj.slug %}">{{obj.title}}</a>
+        </h5>
+        <p class="card-text text-center">{{obj.text|truncatechars:20}}</p>
+
+        <p class="card-text d-flex justify-content-evenly ">
+          <span class="text-secondary"><i class="far fa-comment fa-lg"></i> {{ obj.comment_count }}</span>
+          <span class="text-info"><i class="fas fa-eye ml-3 fa-lg"></i> {{ obj.view_count }}</span>
+          <span class="text-danger"><i class="fab fa-gratipay ml-3 fa-lg"></i> {{ obj.like_count }}</spanS>
+        </p>
+        <div class="card-footer p-0 m-0">
+        <p class="card-text text-center">
+          <small class="text-muted"><i class="far fa-clock"></i> Created {{obj.created_date|timesince}} ago. </small>
+        </p>
       </div>
     </div>
-      {% endfor %}
+    </div>
   </div>
+
+  {% endfor %}
+</div>
 </div>
 {% endblock content %}
