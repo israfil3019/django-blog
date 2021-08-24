@@ -20,5 +20,8 @@ class BlogForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
+        widgets = {
+            'content': forms.Textarea(attrs={'rows':'5', 'cols': '40'}),
+        }
         fields = ('content',)
         

@@ -20,7 +20,7 @@
         <div class="m-3 pb-3 d-flex justify-content-evenly">
             <span class="text-secondary"><i class="far fa-comment fa-3x "></i></i> {{ object.comment_count }}</span>
             <span class="text-info"><i class="fas fa-eye ml-3 fa-3x"></i> {{ object.view_count }}</span>
-            <span class="text-primary"><i class="fas fa-thumbs-up ml-3 fa-3x"></i> {{ object.like_count }}</span>
+            <span class="text-danger" id="heart"><i class="fab fa-gratipay ml-3 fa-3x"></i> {{ object.like_count }}</span>
         </div>
         <div>
             <form action="{% url 'blog:like' object.slug %}" method="POST">
