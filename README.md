@@ -20,4 +20,4 @@ Users can create posts and publish them on the blog page.
 
 - Users can be register with their username- email and password. (forget password option in the login page)
 
-<img src='images/reset.png' alt='password-reset-page' width="600" height="200">
+![reset screen](reset.png)
