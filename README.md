@@ -4,6 +4,8 @@ Django Blog Project
 
 Users can create posts and publish them on the blog page.
 
+![blog app](django-blog.gif)
+
 - My project will have registration and login features for users.
 - Users will be able to see the blog page that I mentioned above regardless of whether they are logged in or not.
 - Users will be able to see the details by clicking on the post.
@@ -18,4 +20,4 @@ Users can create posts and publish them on the blog page.
 
 - Users can be register with their username- email and password. (forget password option in the login page)
 
- <img src='reset.png' width="7500" height="460">
+<img src='images/reset.png' alt='password-reset-page' width="600" height="200">
