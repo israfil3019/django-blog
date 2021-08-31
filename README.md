@@ -20,4 +20,4 @@ Users can create posts and publish them on the blog page.
 
 - Users can be register with their username- email and password. (forget password option in the login page)
 
-![reset screen](reset.png)
+![screenshot-reset](https://github.com/israfil3019/django-blog/blob/main/reset.PNG)
