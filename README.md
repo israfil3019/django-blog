@@ -1,4 +1,4 @@
-Django Blog Project![deployment](http://israfil.pythonanywhere.com/)
+Django Blog Project
 
 ## Description
 
